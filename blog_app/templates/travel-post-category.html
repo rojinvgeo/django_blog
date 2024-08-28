@@ -1,0 +1,468 @@
+
+        
+           
+        {% extends 'base.html' %}
+        {% load static %}
+        {% block nav %}
+        
+        <!--=====================================-->
+        <!--=          Contact Area Start       =-->
+        <!--=====================================-->
+     
+        <section class="archive-wrap-layout-3 space-top-60 bg-color-light-1 transition-default">
+            <div class="container">
+                <div class="row g-3">
+                    {% for post in posts %}
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder radius-default" style="display: flex; justify-content: center; align-items: center;">
+                                    {% if post.image %}
+                                    <a href="" class="link-wrap img-height-100"><img src="{{ post.image.url }}"style="display: block; width: 500px; height: 200px; object-fit: cover;"  alt="Post"></a>
+                                    {% else %}
+                                    <!-- Display a default image or a message if no image is available -->
+                                     <p>No image available</p>
+                                     {% endif %}
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">TRAVEL</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">{{ post.title }}</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <!-- <img src="assets/media/blog/profile3.webp" alt="Author"> -->
+                                                {{ post.author_name }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>9 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="{% url 'post_details' post.category.slug post.id %}" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+                    </div>
+                    <div class="template-pagination pagination-center">
+                        <ul>
+                            {% if page_obj.has_previous %}
+                                <li><a href="{% url 'post_list' category.slug page_obj.previous_page_number %}">Prev</a></li>
+                            {% else %}
+                                <li class="disabled">Prev</li>
+                            {% endif %}
+                            
+                            {% if page_obj.paginator.num_pages <= 2 %}
+                                {% for page in page_obj.paginator.page_range %}
+                                    <li {% if page == page_obj.number %}class="selected"{% endif %}>
+                                        <a href="{% if page == page_obj.number %}#{% else %}{% url 'post_list' category.slug page %}{% endif %}">{{ page }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li {% if page_obj.number == 1 %}class="selected"{% endif %}>
+                                    <a href="{% if page_obj.number == 1 %}#{% else %}{% url 'post_list' category.slug 1 %}{% endif %}">1</a>
+                                </li>
+                                {% if page_obj.number > 2 %}
+                                    <li class="disabled">...</li>
+                                {% endif %}
+                                <li {% if page_obj.number == page_obj.number %}class="selected"{% endif %}>
+                                    <a href="{% if page_obj.number == page_obj.number %}#{% else %}{% url 'post_list' category.slug page_obj.number %}{% endif %}">{{ page_obj.number }}</a>
+                                </li>
+                                {% if page_obj.paginator.num_pages > page_obj.number|add:1 %}
+                                    <li class="disabled">...</li>
+                                {% endif %}
+                                <li {% if page_obj.paginator.num_pages == page_obj.number %}class="selected"{% endif %}>
+                                    <a href="{% if page_obj.paginator.num_pages == page_obj.number %}#{% else %}{% url 'post_list' category.slug page_obj.paginator.num_pages %}{% endif %}">{{ page_obj.paginator.num_pages }}</a>
+                                </li>
+                            {% endif %}
+                            
+                            {% if page_obj.has_next %}
+                                <li><a href="{% url 'post_list' category.slug page_obj.next_page_number %}">Next</a></li>
+                            {% else %}
+                                <li class="disabled">Next</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+                    {% endblock nav %}
+
+
+
+
+                    <!-- <div class="col-xl-4 col-md-6 col-12"> -->
+                        <!--div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="video-post-wrap">
+                                    <video class="video-box radius-default" id="video-player-1" playsinline controls>
+                                        <source src="assets/media/post-format-video-1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">FOOD</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used
+                                            Strengthen Weak Muscles</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile5.webp' %}" alt="Author">
+                                                John Philipe
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>3 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </!--div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder position-relative radius-default">
+                                    <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-medium popup-youtube"><i class="solid-play"></i></a>
+                                    <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post8.webp' %}" alt="Post"></a>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">MUSIC</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">World's Tallest Building Could Surrounded By A Giant Ring</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile4.webp' %}" alt="Author">
+                                                Alisa Michaels
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>4 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- </div>  -->
+                    
+                    <!-- <div class="col-xl-4 col-md-6 col-12">
+                        <div class="position-relative">
+                            <div id="post-slider-4" class="post-slider-4 img-height-100 gutter-30">
+                                <div>
+                                    <div class="animated-border border-style-large transition-default">
+                                        <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                            <div class="figure-holder radius-default">
+                                                <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post11.webp' %}" alt="Post"></a>
+                                            </div>
+                                            <div class="content-holder">
+                                                <div class="entry-category style-2 color-dark-1-fixed">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="archive-layout1.html">FASHION</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Air Pods with Wireless Charging Case That Happy</a></h3>
+                                                <ul class="entry-meta color-dark-1">
+                                                    <li class="post-author">
+                                                        <a href="author.html">
+                                                            <img src="{% static 'imgs/assets/media/blog/profile2.webp' %}" alt="Author">
+                                                            Sergio Pliego
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-clock-circle"></i>7 min read
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-eye"></i>9k
+                                                    </li>
+                                                </ul>
+                                                <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="animated-border border-style-large transition-default">
+                                        <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                            <div class="figure-holder radius-default">
+                                                <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post26.webp' %}" alt="Post"></a>
+                                            </div>
+                                            <div class="content-holder">
+                                                <div class="entry-category style-2 color-dark-1-fixed">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="archive-layout1.html">FASHION</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">World's Tallest Building Could Surrounded By A Giant Ring</a></h3>
+                                                <ul class="entry-meta color-dark-1">
+                                                    <li class="post-author">
+                                                        <a href="author.html">
+                                                            <img src="{% static 'imgs/assets/media/blog/profile2.webp' %}" alt="Author">
+                                                            Sergio Pliego
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-clock-circle"></i>7 min read
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-eye"></i>9k
+                                                    </li>
+                                                </ul>
+                                                <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="animated-border border-style-large transition-default">
+                                        <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                            <div class="figure-holder radius-default">
+                                                <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post27.webp' %}" alt="Post"></a>
+                                            </div>
+                                            <div class="content-holder">
+                                                <div class="entry-category style-2 color-dark-1-fixed">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="archive-layout1.html">FASHION</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used Strengthen Weak</a></h3>
+                                                <ul class="entry-meta color-dark-1">
+                                                    <li class="post-author">
+                                                        <a href="author.html">
+                                                            <img src="{% static 'imgs/assets/media/blog/profile2.webp' %}" alt="Author">
+                                                            Sergio Pliego
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-clock-circle"></i>7 min read
+                                                    </li>
+                                                    <li>
+                                                        <i class="regular-eye"></i>9k
+                                                    </li>
+                                                </ul>
+                                                <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="slider-navigation-layout1 color-light-1-fixed nav-size-regular position-layout2">
+                                <li id="post-prev-4" class="prev"><i class="regular-arrow-left"></i></li>
+                                <li id="post-next-4" class="next"><i class="regular-arrow-right"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder radius-default">
+                                    <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post12.webp' %}" alt="Post"></a>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">HISTORY</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile1.webp' %}" alt="Author">
+                                                Kristin Watson
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>6 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="audio-post-wrap radius-default"><iframe allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/184476938&amp;color=%23ff2c54&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">GAME</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used
+                                            Strengthen Weak</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile5.webp' %}" alt="Author">
+                                                Jenny Wilson
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>3 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder radius-default">
+                                    <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post25.webp' %}" alt="Post"></a>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">NEWS</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">World's Tallest Building Could Surrounded By A Giant Ring</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile4.webp' %}" alt="Author">
+                                                Esther Howard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>1 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder radius-default">
+                                    <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post26.webp' %}" alt="Post"></a>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">ANIMATION</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used
+                                            Strengthen Weak Muscles</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile3.webp' %}" alt="Author">
+                                                John Philipe
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>8 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="animated-border border-style-large transition-default">
+                            <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
+                                <div class="figure-holder radius-default">
+                                    <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{% static 'imgs/assets/media/blog/post27.webp' %}" alt="Post"></a>
+                                </div>
+                                <div class="content-holder">
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">DESIGN</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">Air Pods with Wireless Charging Case That Happy</a></h3>
+                                    <ul class="entry-meta color-dark-1">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                <img src="{% static 'imgs/assets/media/blog/profile2.webp' %}" alt="Author">
+                                                Alisa Michaels
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>13 min read
+                                        </li>
+                                        <li>
+                                            <i class="regular-eye"></i>9k
+                                        </li>
+                                    </ul>
+                                    <a href="post-format-default.html" class="btn-text color-dark-1 mt-3">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                
+        <!--=====================================-->
+        <!--=        Newsletter Area Start      =-->
+        <!--=====================================-->
+        

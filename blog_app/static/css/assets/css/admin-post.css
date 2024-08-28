@@ -1,0 +1,164 @@
+#create-blog-form {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #52b8a9b1;
+    width: 380px;
+    margin-top: 5px;
+    
+}
+
+.select-container {
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.select-container:hover {
+    background-color: #ccc;
+}
+
+.select-container select {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.select-container select option {
+    background-color: #f2f2f2;
+    color: #890e0e;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.select-container select option:hover {
+    background-color: #ccc;
+    color: #666;
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+   
+}
+
+ label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: teal;
+    font-size: small;
+    
+   
+    
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 18px;
+    border-color: powderblue;
+    
+    
+    
+}
+
+#image{
+    border-color: AliceBlue;
+    border-radius: 3px;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+   background-color: #fff;
+}
+
+.form-group input[type="file"]:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.5);
+}
+
+/* Style the file input button */
+.form-group input[type="file"]::-webkit-file-upload-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+    background-color:#191970;
+}
+
+
+.form-group input[type="datetime-local"] {
+    width: 60%; /* reduced width */
+    height: 6%;
+    padding: 5px; /* reduced padding */
+    padding-right: 5px;
+    border: 1px solid #B0E0E6;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+}
+
+.form-group input[type="datetime-local"]:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.5);
+}
+
+/* Style the date and time input field */
+.form-group input[type="datetime-local"]::-webkit-datetime-edit {
+    padding: 5px;
+    
+   
+}
+
+/* * Style the date and time input field text */ 
+.form-group input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Style the date and time input field icons */
+.form-group input[type="datetime-local"]::-webkit-datetime-edit-ampm-field,
+.form-group input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+.form-group input[type="datetime-local"]::-webkit-datetime-edit-minute-field,
+.form-group input[type="datetime-local"]::-webkit-datetime-edit-second-field {
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+
+
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: #030f1c;
+    padding: 10px 20px;
+    margin-left: 140px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: hsl(211, 76%, 12%);
+}
