@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     {% load static %}
@@ -6,6 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/assets/css/admin-post.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/assests/css/js_alert.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tinyeditor.css' %}">
+
+    <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+    
 </head>
 <body>
     <form id="create-blog-form" method="post" enctype="multipart/form-data">
@@ -25,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea name="content" id="content" placeholder="Enter content"></textarea>
+            <textarea name="content" id="id_content" placeholder="Enter content"></textarea>
         </div>
         
         <div class="form-group">
@@ -49,22 +54,24 @@
         document.getElementById('create-post-btn').addEventListener('click', function() {
             // event.preventDefault(); // Add this line
             Swal.fire({
-                title: 'Hello from Django!',
+                title: 'Successful!',
                 icon: 'success',
                 timer: 6000
             });
         });
     </script>
 
-    <!-- <script>
-        document.getElementById('create-post-btn').addEventListener('click', function() {
-            var script = 
-                alert("Hello from Django!");
-            ;
-            var popup = document.createElement('div');
-            popup.innerHTML = `<script>${script}<\/script>`; // Escape the closing script tag
-            document.body.appendChild(popup);
+<!-- #tinyeditor script------ -->
+    <script>
+        tinymce.init({
+            selector: '#id_content',  // Replace with your textarea ID
+            height: 400,
+            width: 400,
+            menubar: false,
+            plugins: 'advlist autolink lists link image charmap print preview anchor',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            content_css: '/static/css/content.css',
         });
-    </script> -->
+    </script>
 </body>
 </html> 

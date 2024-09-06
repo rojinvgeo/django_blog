@@ -136,18 +136,21 @@ def create_post(request):
 #         post = Post(author=author, title=title, content=content, category=category, image=image, created_at=created_at)
 #         post.save()
 #     return render(request,'admin_post.html',)
+import bleach
+
+
 
 
 #testing
 
 from django.core.paginator import Paginator
 
-def post_list_by_category(request, category_slug, page_number=1):
-    
+def post_list_by_category(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     posts = Post.objects.filter(category=category)
-    paginator = Paginator(posts, 10)
-    page_obj = paginator.get_page(page_number)
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(posts, 9)
+    page_obj = paginator.get_page(page_number)  # Remove category_slug
     admin_username = request.session.get('user',  'Unknown')  # Retrieve the admin's username from the session
     # current_author = request.user.username if request.user.is_authenticated else request.session.get('admin_user')
     for post in posts:
@@ -158,7 +161,7 @@ def post_list_by_category(request, category_slug, page_number=1):
     # author_username = request.user.username if request.user.is_authenticated else 'Guest'
     image_urls = [post.image.url for post in posts]
     context = {
-        'posts': posts,
+        'posts': page_obj.object_list,  # Use page_obj.object_list instead of posts
         'category': category,
         'image_urls': image_urls,
         'page_obj':page_obj,
@@ -170,16 +173,49 @@ def post_list_by_category(request, category_slug, page_number=1):
     return render(request, 'travel-post-category.html', context)
 
 
+#post_list_by_category orginal code
+
+#def post_list_by_category(request, category_slug, page_number=1):
+    
+    category = get_object_or_404(Category, slug=category_slug)
+    posts = Post.objects.filter(category=category)
+    paginator = Paginator(posts, 9)
+    page_obj = paginator.get_page('page', 1)
+    admin_username = request.session.get('user',  'Unknown')  # Retrieve the admin's username from the session
+    # current_author = request.user.username if request.user.is_authenticated else request.session.get('admin_user')
+    for post in posts:
+        print('POST IMAGE', post.image.url)  # Print the image URL
+        post.author_name = admin_username
+
+    # admin_username = request.session.get('user')  # Get the admin's username from the session
+    # author_username = request.user.username if request.user.is_authenticated else 'Guest'
+    image_urls = [post.image.url for post in posts]
+    context = {
+        'posts': page_obj.object_list,  # Use page_obj.object_list instead of posts
+        'category': category,
+        'image_urls': image_urls,
+        'page_obj':page_obj,
+        'url_path': request.path  # Pass the URL path to the template
+        #  'author_name': admin_username
+    }
+    for i in posts:
+        print(i.author.username)
+    return render(request, 'travel-post-category.html', context)
+
+import markdown2
 
 
 def post_detail(request, category_slug, post_id):
     category = get_object_or_404(Category, slug=category_slug)
     post = get_object_or_404(Post, id=post_id, category=category)
+    content = post.content  # Assuming post.content holds the HTML content
+    formatted_content = markdown2.markdown(content)
     admin_username = request.session.get('user',  'Unknown')
     post.author_name = admin_username
     context = {
         'post': post,
         'category': category,
+        'content': formatted_content
         }
     return render(request, 'postdetails.html', context)
 

@@ -28,8 +28,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TINYMCE_JS_URL = 'tinymce/js/tinymce/tinymce.min.js'
 
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 400,
+    'width': 800,
+    'theme': 'modern',
+    'plugins': 'advlist autolink lists link image charmap print preview anchor',
+    'toolbar': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    'content_css': '/static/css/content.css',
+}
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog_app'
+    'blog_app',
+    'tinymce'
 ]
 
 MIDDLEWARE = [

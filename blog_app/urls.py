@@ -8,7 +8,8 @@ urlpatterns = [
     path('blog/admin/create_post',views.create_post, name='blog/admin/create_post'),
     # path('blog/category/<str:category_name>/', views.post_list_by_category, name='post_list_by_category'),
     # path('blog/category/<str:category_slug>/', views.post_list_by_category, name='post_list_by_category'),
-    path('blog/category/<slug:category_slug>/', views.post_list_by_category, name='post_list_by_category'),
+    path('blog/category/<slug:category_slug>/', views.post_list_by_category, name='post_list_by_category_paginated'),
+    #path('blog/category/<slug:category_slug>/', views.post_list_by_category, name='post_list_by_category'),
     path('blog/category/<slug:category_slug>/<int:post_id>/', views.post_detail, name='post_details'),
     
     # path('blog/category/<slug:category_slug>/post', views.travel_post_details, name='travel_post_details')

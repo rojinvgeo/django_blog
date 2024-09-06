@@ -60,42 +60,37 @@
                     <div class="template-pagination pagination-center">
                         <ul>
                             {% if page_obj.has_previous %}
-                                <li><a href="{% url 'post_list' category.slug page_obj.previous_page_number %}">Prev</a></li>
+                                <li><a href="{% url 'post_list_by_category_paginated' category.slug %}?page={{ page_obj.previous_page_number }}">Prev</a></li>
                             {% else %}
-                                <li class="disabled">Prev</li>
+                                <li class="disabled"></li>
                             {% endif %}
                             
-                            {% if page_obj.paginator.num_pages <= 2 %}
-                                {% for page in page_obj.paginator.page_range %}
+                            {% if page_obj.number > 2 %}
+                                <li><a href="{% url 'post_list_by_category' category.slug %}?page=1">1</a></li>
+                                <li class="disabled">...</li>
+                            {% endif %}
+                            
+                            {% for page in page_obj.paginator.page_range %}
+                                {% if page >= page_obj.number|add:-1 and page <= page_obj.number|add:1 %}
                                     <li {% if page == page_obj.number %}class="selected"{% endif %}>
-                                        <a href="{% if page == page_obj.number %}#{% else %}{% url 'post_list' category.slug page %}{% endif %}">{{ page }}</a>
+                                        <a href="{% url 'post_list_by_category_paginated' category.slug %}?page={{ page }}">{{ page }}</a>
                                     </li>
-                                {% endfor %}
-                            {% else %}
-                                <li {% if page_obj.number == 1 %}class="selected"{% endif %}>
-                                    <a href="{% if page_obj.number == 1 %}#{% else %}{% url 'post_list' category.slug 1 %}{% endif %}">1</a>
-                                </li>
-                                {% if page_obj.number > 2 %}
-                                    <li class="disabled">...</li>
                                 {% endif %}
-                                <li {% if page_obj.number == page_obj.number %}class="selected"{% endif %}>
-                                    <a href="{% if page_obj.number == page_obj.number %}#{% else %}{% url 'post_list' category.slug page_obj.number %}{% endif %}">{{ page_obj.number }}</a>
-                                </li>
-                                {% if page_obj.paginator.num_pages > page_obj.number|add:1 %}
-                                    <li class="disabled">...</li>
-                                {% endif %}
-                                <li {% if page_obj.paginator.num_pages == page_obj.number %}class="selected"{% endif %}>
-                                    <a href="{% if page_obj.paginator.num_pages == page_obj.number %}#{% else %}{% url 'post_list' category.slug page_obj.paginator.num_pages %}{% endif %}">{{ page_obj.paginator.num_pages }}</a>
-                                </li>
+                            {% endfor %}
+                            
+                            {% if page_obj.paginator.num_pages > page_obj.number|add:1 %}
+                                <li class="disabled">...</li>
+                                <li><a href="{% url 'post_list_by_category' category.slug %}?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
                             {% endif %}
                             
                             {% if page_obj.has_next %}
-                                <li><a href="{% url 'post_list' category.slug page_obj.next_page_number %}">Next</a></li>
+                                <li><a href="{% url 'post_list_by_category_paginated' category.slug %}?page={{ page_obj.next_page_number }}">Next</a></li>
                             {% else %}
-                                <li class="disabled">Next</li>
+                                <li class="disabled"></li>
                             {% endif %}
                         </ul>
                     </div>
+                    
                 </div>
             </section>
                     {% endblock nav %}
