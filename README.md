@@ -5,6 +5,7 @@ Built with Django, Python and JavaScript, BlogBazzar offers a vibrant space for 
 
 
 Features:
+
 1, Multi-Category System: Explore diverse categories (Travel, Lifestyle, Technology and more).
 
 2, Post Listing: Browse category-specific posts with concise summaries.
