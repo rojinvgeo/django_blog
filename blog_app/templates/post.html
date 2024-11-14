@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/assets/css/post-form.css' %}">
+</style>
+</head>
+<body>
+  <div class="container">
+    <label class="label" for="category">Category</label>
+    <select id="category" class="select">
+      <option value="news">News</option>
+      <option value="events">Events</option>
+      <option value="updates">Updates</option>
+    </select>
+
+    <label class="label" for="content">Content</label>
+    <textarea id="content" class="input" placeholder="Write your post here..."></textarea>
+
+    <label class="label" for="image">Image</label>
+    <input type="file" id="image" class="file-label">
+
+    <label class="label" for="date">Uploaded on</label>
+    <input type="date" id="date" class="input">
+
+    <button class="button" type="submit">Post</button>
+  </div>
+</body>
+</html>

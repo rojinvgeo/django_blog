@@ -1,0 +1,117 @@
+
+body {
+  background-image: url('/static/imgs/assets/media/form-back.jpg');
+  background-size: cover; /* Optional: Scale the image to cover the form */
+  display: flex;
+  }
+  
+  .container {
+    width: 300px;
+    margin: 100px auto 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Optional: For absolute positioning */
+    left: 14%; /* Optional: For absolute positioning */
+    
+    transform: translateX(-50%); /* Centers horizontally */
+
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5D5FEE;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 90%;
+  }
+
+
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+  }
+
+  
+  .input:focus {
+    outline: none;
+    border-color: #5D5FEE; /* Change border color on focus */
+  }
+
+  
+  .select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('https://i.imgur.com/J6r0lW4.png') no-repeat right 10px center;
+    background-size: 15px;
+  }
+  
+  .button {
+    background-color: #5D5FEE;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .button:hover {
+    background-color: #4C4EE5;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; margin-bottom: 15px;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: #5D5FEE; /* Change border color on focus */
+}
+
+
+.file-input {
+  display: none; /* Hide the default file input */
+}
+
+.file-label {
+  display: inline-block;
+  width: 100%;
+  padding-left: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 0px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  border-radius: 4px;
+  background-color: #5D5FEE; /* Default background color */
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.file-label:hover {
+  background-color: #4C4EE5;
+}

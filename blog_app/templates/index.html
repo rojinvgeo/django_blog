@@ -8,12 +8,12 @@
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BlogXpress | Blog and News Minimal Responsive HTML Template</title>
+    <title>BlogBazzar|Explore, Discover, Inspire</title>
     <meta name="description" content="Author: AxilTheme, Template: HTML, Category: Blog, Price: $13.00,
     Length: 23 pages">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/assets/media/favicon.svg' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/assets/media/logo.svg' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/fonts/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/slick/slick.css'%}">
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/slick/slick-theme.css' %}">
@@ -186,7 +186,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="logo-holder">
                             <div class="d-md-block d-none">
-                                <a href="index.html" class="link-wrap desktop-logo img-height-100" aria-label="Site Logo"><img width="131" height="47" src="{% static 'imgs/assets/media/logo-dark.svg' %}" alt="logo"></a>
+                                <a href="index.html" class="link-wrap desktop-logo img-height-100" aria-label="Site Logo"><img width="131" height="47" src="{% static 'imgs/assets/media/logo.jpg' %}" alt="logo"></a>
                             </div>
                             <div class="d-md-none d-block">
                                 <a href="index.html" class="link-wrap mobile-logo img-height-100" aria-label="Site Logo"><img width="86" height="31" src="{% static 'imgs/assets/media/mobile-logo.svg' %}" alt="logo"></a>
@@ -381,7 +381,7 @@
         <section class="hero-wrap-layout1 bg-color-light-1 transition-default">
             <div class="container">
                 <div class="hero-box-layout1">
-                    <h1 class="title h1-large">Hey, We’re Blogxpress.<span> See Our Thoughts, Stories And Ideas.</span></h1>
+                    <h1 class="title h1-large">Hey, We’re BlogBazzar.<span>Unbox the Story:Explore, Discover, Inspire </span></h1>
                     <form action="#" class="search-form radius-default">
                         <input type="email" class="email-input" placeholder="Search">
                         <button type="submit" class="axil-btn"><i class="regular-search-02"></i>
@@ -406,7 +406,7 @@
                                         <ul>
                                             <li>
                                                
-                                                <a href="{% url 'post_list_by_category' 'travel'  %}">TRAVEL</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'travel'  %}">TRAVEL</a>
                                                
 
                                                 
@@ -423,7 +423,7 @@
                                     <div class="entry-category style-4 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">LIFESTYLE</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'lifestyle'  %}">LIFESTYLE</a>
                                             </li>
                                         </ul>
                                     </div>

@@ -7,11 +7,12 @@ from django.conf import settings
 
 # Create your views here.
 
+
 def blog(request):
     travel_category = Category.objects.get(slug='travel')
     technology_category=Category.objects.get(slug='technology')
     business_category=Category.objects.get(slug='business')
-    health_category=Category.objects.get(slug='health')
+    health_category=Category.objects.get(slug='lifestyle')
     fashion_category=Category.objects.get(slug='fashion')
 
     specific_categories = [travel_category, 
@@ -40,12 +41,14 @@ def admin_login(request):
     else:
         return render(request,'admin_signin.html')
     
-    
+def post(request):
+    return render (request, 'post.html')
 
 def create_post(request):
     categories = Category.objects.all()
     author_username = request.session.get('user')
     print(f"Session user: {author_username}")
+    
     if 'user' not in request.session:
         return HttpResponse("You must be logged in to create a post", status=403)
     post = None  # Define post variable here
@@ -68,11 +71,6 @@ def create_post(request):
         image = request.FILES.get('image')
         created_at = request.POST.get('created_at')
 
-        # if not category_id or not category_id.isdigit():
-        #     return HttpResponse("Invalid category ID", status=400)
-
-        # category_id = int(category_id)
-
         try:
             category = Category.objects.get(id=int(category_id))
         except Category.DoesNotExist:
@@ -81,7 +79,6 @@ def create_post(request):
        
         # Create and save the Post instance
         post = Post(
-            # auth_name=author_username,  # Use the session username directly
             title=title,
             content=content,
             category=category,
@@ -97,10 +94,9 @@ def create_post(request):
         'categories': categories
     }
 
-        # return HttpResponse('success') 
 
     # Render the admin page with categories
-    # categories = Category.objects.all()
+
     return render(request, 'admin_post.html', context)
 
 
@@ -150,13 +146,19 @@ def post_list_by_category(request, category_slug):
     posts = Post.objects.filter(category=category)
     page_number = request.GET.get('page', 1)
     paginator = Paginator(posts, 9)
-    page_obj = paginator.get_page(page_number)  # Remove category_slug
-    admin_username = request.session.get('user',  'Unknown')  # Retrieve the admin's username from the session
+    page_obj = paginator.get_page(page_number)
+
+    for post in page_obj.object_list:
+      post.author_name = 'Admin' if request.session.get('user') == 'admin' else post.author.username 
+
+    # admin_username = request.session.get('user',  'Unknown')  # Retrieve the admin's username from the session
     # current_author = request.user.username if request.user.is_authenticated else request.session.get('admin_user')
     for post in posts:
         print('POST IMAGE', post.image.url)  # Print the image URL
-        post.author_name = admin_username
+          # Check if author_name is being populated
+          
 
+            
     # admin_username = request.session.get('user')  # Get the admin's username from the session
     # author_username = request.user.username if request.user.is_authenticated else 'Guest'
     image_urls = [post.image.url for post in posts]
@@ -170,6 +172,7 @@ def post_list_by_category(request, category_slug):
     }
     for i in posts:
         print(i.author.username)
+        # Check the context
     return render(request, 'travel-post-category.html', context)
 
 
