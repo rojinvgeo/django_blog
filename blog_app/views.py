@@ -4,6 +4,7 @@ from .models import *
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.conf import settings
+from django.contrib import messages
 
 # Create your views here.
 
@@ -21,7 +22,25 @@ def blog(request):
                            health_category,
                            fashion_category,
                            ]
-    return render(request, 'index.html',{'specific_categories': specific_categories})
+    # Retrieve top 3 clicked posts
+    top_stories = Post.objects.order_by('-clicks')[:3]
+    
+    for post in top_stories:
+        if post.author.is_superuser:
+            post.author_name = "Admin"
+        else:
+            post.author_name = post.author.username
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post = Post.objects.get(id=post_id)
+        post.clicks += 1
+        post.save()
+        messages.success(request, 'Post viewed successfully!')
+        return redirect('blog')
+    return render(request, 'index.html',{
+        'specific_categories': specific_categories,
+        'top_stories': top_stories
+    })
 
 
 def blog_admin(request):
@@ -44,25 +63,16 @@ def admin_login(request):
 def post(request):
     return render (request, 'post.html')
 
+
 def create_post(request):
     categories = Category.objects.all()
     author_username = request.session.get('user')
     print(f"Session user: {author_username}")
+
     
     if 'user' not in request.session:
         return HttpResponse("You must be logged in to create a post", status=403)
-    post = None  # Define post variable here
-
-    if request.session['user'] == 'admin':
-        # Admin is creating the post, so proceed with admin-specific logic
-        pass
-    else:
-        # Regular user is creating the post, so proceed with user-specific logic
-        pass
-
-    # Rest of your code here...
-
-    # Since you don't have a User model, we'll use the auth_name directly
+    
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
@@ -76,28 +86,93 @@ def create_post(request):
         except Category.DoesNotExist:
             return HttpResponse("Category not found", status=404)
 
-       
-        # Create and save the Post instance
-        post = Post(
-            title=title,
-            content=content,
-            category=category,
-            image=image,
-            created_at=created_at,
-            author=request.user 
-        )
+        if request.session['user'] == 'admin':
+            # Admin is creating the post
+            post = Post(
+                title=title,
+                content=content,
+                category=category,
+                image=image,
+                created_at=created_at,
+                author=request.user 
+            )
+        else:
+            # Regular user is creating the post
+            post = Post(
+                title=title,
+                content=content,
+                category=category,
+                image=image,
+                created_at=created_at,
+                author=request.user
+            )
+        
         post.save()
+        
 
-        # Add the post instance to the context dictionary
-    context = {
-        'post': post,
-        'categories': categories
-    }
+    return render(request, 'post.html', {'categories': categories})
 
 
-    # Render the admin page with categories
 
-    return render(request, 'admin_post.html', context)
+
+
+
+# def create_post(request):
+#     categories = Category.objects.all()
+#     author_username = request.session.get('user')
+#     print(f"Session user: {author_username}")
+#     admin_user = User.objects.get(username='admin')
+    
+#     if 'user' not in request.session:
+#         return HttpResponse("You must be logged in to create a post", status=403)
+#     post = None  # Define post variable here
+
+#     if request.session['user'] == 'admin':
+#         # Admin is creating the post, so proceed with admin-specific logic
+#         pass
+#     else:
+#         # Regular user is creating the post, so proceed with user-specific logic
+#         pass
+
+#     # Rest of your code here...
+
+#     # Since you don't have a User model, we'll use the auth_name directly
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         content = request.POST.get('content')
+#         category_id = request.POST.get('category')
+#         print(f"Category ID: {category_id}")
+#         image = request.FILES.get('image')
+#         created_at = request.POST.get('created_at')
+
+#         try:
+#             category = Category.objects.get(id=int(category_id))
+#         except Category.DoesNotExist:
+#             return HttpResponse("Category not found", status=404)
+
+       
+#         # Create and save the Post instance
+#         post = Post(
+#             title=title,
+#             content=content,
+#             category=category,
+#             image=image,
+#             created_at=created_at,
+#             author=request.user,
+#             admin= admin_user 
+#         )
+#         post.save()
+
+#         # Add the post instance to the context dictionary
+#     context = {
+#         'post': post,
+#         'categories': categories
+#     }
+
+
+#     # Render the admin page with categories
+
+#     return render(request, 'post.html', context)
 
 
 # from django.http import FileResponse
@@ -173,7 +248,7 @@ def post_list_by_category(request, category_slug):
     for i in posts:
         print(i.author.username)
         # Check the context
-    return render(request, 'travel-post-category.html', context)
+    return render(request, 'postlist_by_category.html', context)
 
 
 #post_list_by_category orginal code
@@ -211,6 +286,8 @@ import markdown2
 def post_detail(request, category_slug, post_id):
     category = get_object_or_404(Category, slug=category_slug)
     post = get_object_or_404(Post, id=post_id, category=category)
+    post.clicks += 1  # Increment the clicks field
+    post.save()  # Save the changes
     content = post.content  # Assuming post.content holds the HTML content
     formatted_content = markdown2.markdown(content)
     admin_username = request.session.get('user',  'Unknown')

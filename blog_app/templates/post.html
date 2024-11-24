@@ -1,29 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
     {% load static %}
 <link rel="stylesheet" href="{% static 'css/assets/css/post-form.css' %}">
-</style>
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
 </head>
 <body>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
   <div class="container">
     <label class="label" for="category">Category</label>
-    <select id="category" class="select">
-      <option value="news">News</option>
-      <option value="events">Events</option>
-      <option value="updates">Updates</option>
+    <select id="category" class="select" name="category">
+      {% for cat in categories %}
+      <option value="{{ cat.id }}">{{ cat.name }}</option>
+      <!-- <option value="events">Events</option>
+      <option value="updates">Updates</option> -->
+      {% endfor %}
     </select>
 
+      <label for="title" class="label">Title:</label>
+      <input type="text" name="title" id="title" class="input" placeholder="Enter title">
+  
+
     <label class="label" for="content">Content</label>
-    <textarea id="content" class="input" placeholder="Write your post here..."></textarea>
+    <textarea id="content" name="content"  class="input" placeholder="Write your post here..."></textarea>
+
 
     <label class="label" for="image">Image</label>
-    <input type="file" id="image" class="file-label">
+    <input type="file" name="image" id="image" class="file-label">
 
     <label class="label" for="date">Uploaded on</label>
-    <input type="date" id="date" class="input">
+    <input type="date" name="created_at" id="date" class="input">
 
-    <button class="button" type="submit">Post</button>
+    <button class="button" type="submit" id="create-post-btn">Post</button>
   </div>
+</form> 
+
+
+ <!-- #testing -->
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script>
+     document.getElementById('create-post-btn').addEventListener('click', function() {
+         // event.preventDefault(); // Add this line
+         Swal.fire({
+             title: 'Successful!',
+             icon: 'success',
+             timer: 6000
+         });
+     });
+ </script>
+
+
+<!-- #tinyeditor script------ -->
+<script>
+  tinymce.init({
+      selector: '#content',  // Replace with your textarea ID
+      height: '200px', // Set the height to a relative value
+      width: '100%',
+      menubar: false,
+      resize: true,
+      statusbar: false,
+      plugins: 'advlist autolink lists link image charmap print preview anchor',
+      toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      content_css: '/static/css/content.css',
+  });
+</script>
+
+
 </body>
 </html>
