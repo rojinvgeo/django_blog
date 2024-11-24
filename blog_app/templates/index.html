@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/assets/media/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/assets/css/top_story.css' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/fonts/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/slick/slick.css'%}">
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/slick/slick-theme.css' %}">
@@ -201,44 +202,52 @@
                                 </div>
                                 <button aria-label="Offcanvas" type="button" class="mobile-close" data-bs-dismiss="offcanvas"><i class="regular-multiply-circle"></i></button>
                             </div>
-                            <nav id="dropdown" class="template-main-menu">
+                            <nav id="" class="template-main-menu">
                                 <ul class="menu">
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="#">Home</a>
-                                        <ul class="sub-menu">
+                                    <li class="menu-item">
+                                        <a href="about.html">Home</a>
+                                    </li>
+                                        <!-- <ul class="sub-menu">
                                             <li class="menu-item"><a href="index.html">Home Default</a></li>
                                             <li class="menu-item"><a href="home-modern.html">Home Modern</a></li>
                                             <li class="menu-item"><a href="home-standard.html">Home Standard</a></li>
                                             <li class="menu-item"><a href="home-news.html">Home News</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item">
+                                        </ul--> 
+                                   
+                                    <!-- <li class="menu-item">
                                         <a href="about.html">About</a>
-                                    </li>
+                                    </li> -->
+
+
                                     <li class="menu-item menu-item-has-children">
-                                        <a href="#">Pages</a>
+                                        <a href="#">Blogs</a>
                                         <ul class="sub-menu">
                                             <li class="menu-item menu-item-has-children second-lavel">
-                                                <a href="#">Archive Pages</a>
-                                                <ul class="sub-menu">
+                                                <a href="{% url 'post_list_by_category_paginated' 'travel'  %}">TRAVEL</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'lifestyle'  %}">LIFESTYLE</a>
+                                                <a href="#">TECHNOLOGY</a>
+                                                <a href="#">BUSINESS</a>
+                                                <a href="#">EDUCATION</a>
+                                                <a href="#">FITNESS</a>
+                                                <!-- <ul class="sub-menu">
                                                     <li class="menu-item"><a href="archive-layout1.html">Archive Layout 1</a></li>
                                                     <li class="menu-item"><a href="archive-layout2.html">Archive Layout 2</a></li>
                                                     <li class="menu-item"><a href="archive-layout3.html">Archive Layout 3</a></li>
                                                     <li class="menu-item"><a href="archive-layout4.html">Archive Layout 4</a></li>
                                                     <li class="menu-item"><a href="archive-layout5.html">Archive Layout 5</a></li>
                                                     <li class="menu-item"><a href="archive-layout6.html">Archive Layout 6</a></li>
-                                                </ul>
+                                                </ul> -->
                                             </li>
-                                            <li class="menu-item menu-item-has-children second-lavel">
-                                                <a href="#">Other Pages</a>
-                                                <ul class="sub-menu">
+                                            <!-- <li class="menu-item menu-item-has-children second-lavel">
+                                                <a href="#">Other Pages</a> -->
+                                                <!-- <ul class="sub-menu">
                                                     <li class="menu-item"><a href="author.html">Author</a></li>
                                                     <li class="menu-item"><a href="404.html">404</a></li>
-                                                </ul>
-                                            </li>
+                                                </ul> -->
+                                            <!-- </li> -->
                                         </ul>
                                     </li>
-                                    <li class="menu-item menu-item-has-children mega-menu-desktop d-lg-block d-none">
+                                    <!-- <li class="menu-item menu-item-has-children mega-menu-desktop d-lg-block d-none">
                                         <a href="#">Single Blog</a>
                                         <div class="container mega-menu-wrap">
                                             <div class="mega-menu-bg">
@@ -282,7 +291,13 @@
                                             <li class="menu-item"><a href="post-format-slider.html">Single Slider</a></li>
                                             <li class="menu-item"><a href="post-format-video.html">Single Video</a></li>
                                         </ul>
+                                    </li> -->
+
+                                    <li class="menu-item">
+                                        <a href="about.html">About</a>
                                     </li>
+
+
                                     <li class="menu-item">
                                         <a href="contact.html">Contact</a>
                                     </li>
@@ -314,6 +329,9 @@
                                             <a class="dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Profile">
                                                 <span class="thumble-holder img-height-100"><img width="40" height="40" src="{% static 'imgs/assets/media/blog/profile4.webp' %}" alt="Profile"></span>
                                             </a>
+
+
+
                                             <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown2">
                                                 <div class="dropdown-menu-inner">
                                                     <div class="profile-content with-icon">
@@ -345,6 +363,97 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="d-lg-block d-none">
+                                    <div class="my_switcher">
+                                        <ul>
+                                            <li title="Light Mode">
+                                                <button type="button" aria-label="Light" class="setColor light" data-theme="light">
+                                                    <i class="solid-light-mode"></i>
+                                                </button>
+                                            </li>
+                                            <li title="Dark Mode">
+                                                <button type="button" aria-label="Dark" class="setColor dark" data-theme="dark">
+                                                    <i class="solid-half-moon"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="d-lg-block d-none">
+                                    <div class="notification-wrap dropdown-item-wrap">
+                                        <div class="navbar navbar-expand-md">
+                                            <div class="dropdown">
+                                                <a class="dropdown-toggle has-notification" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Notification">
+                                                    <span class="icon-holder"><i class="regular-notification-011"></i></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown1">
+                                                    <div class="dropdown-menu-inner">
+                                                        <label class="article-number">Recent Articles (10)</label>
+                                                        <div class="item-wrap">
+                                                            <a href="post-format-default.html" class="notification-item">
+                                                                <div class="post-box">
+                                                                    <div class="figure-holder radius-default img-height-100">
+                                                                        <img width="540" height="600" src=" {% static 'imgs/assets/media/blog/post93.webp' %}" alt="Post">
+                                                                    </div>
+                                                                    <div class="content-holder">
+                                                                        <h3 class="entry-title color-dark-1 h3-extra-small">Could The Complement Our Digit.</h3>
+                                                                        <ul class="entry-meta color-dark-1">
+                                                                            <li>
+                                                                                <i class="regular-clock-circle"></i>3 min read
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="post-format-default.html" class="notification-item">
+                                                                <div class="post-box">
+                                                                    <div class="figure-holder radius-default img-height-100">
+                                                                        <img width="540" height="600" src="{% static 'imgs/assets/media/blog/post94.webp' %}" alt="Post">
+                                                                    </div>
+                                                                    <div class="content-holder">
+                                                                        <h3 class="entry-title color-dark-1 h3-extra-small">On August 15th, an alarming email popped.</h3>
+                                                                        <ul class="entry-meta color-dark-1">
+                                                                            <li>
+                                                                                <i class="regular-clock-circle"></i>8 min read
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="post-format-default.html" class="notification-item">
+                                                                <div class="post-box">
+                                                                    <div class="figure-holder radius-default img-height-100">
+                                                                        <img width="540" height="600" src="{% static 'imgs/assets/media/blog/post95.webp' %}" alt="Post">
+                                                                    </div>
+                                                                    <div class="content-holder">
+                                                                        <h3 class="entry-title color-dark-1 h3-extra-small">Nam eget lorem mattis, consequat felis quis, luctus augue.</h3>
+                                                                        <ul class="entry-meta color-dark-1">
+                                                                            <li>
+                                                                                <i class="regular-clock-circle"></i>3 min read
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="notification-btn-wrap">
+                                                            <a href="archive.html" class="w-100 axil-btn axil-btn-ghost btn-color-alter axil-btn-small">View All
+                                                                <div class="icon-holder"><i class="regular-arrow-right"></i></div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
                             <div class="d-lg-none d-block">
                                 <div class="my_switcher">
                                     <ul>
@@ -451,7 +560,7 @@
                                     <div class="entry-category style-4 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">TECHNOLOGY</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'technology'  %}">TECHNOLOGY</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -465,7 +574,7 @@
                                     <div class="entry-category style-4 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">BUSINESS</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'business'  %}">BUSINESS</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -479,7 +588,7 @@
                                     <div class="entry-category style-4 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">EDUCATION</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'education'  %}">EDUCATION</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -493,7 +602,7 @@
                                     <div class="entry-category style-4 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">FITNESS</a>
+                                                <a href="{% url 'post_list_by_category_paginated' 'fitness'  %}">FITNESS</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -513,7 +622,108 @@
         <!--=====================================-->
         <!--=          Post Area Start          =-->
         <!--=====================================-->
+
+
         <section class="post-wrap-layout21 space-top-50 bg-color-light-1 transition-default">
+            <div class="container">
+                <div class="section-heading heading-style-1">
+                    <h2 class="title">Top Blogs</h2>
+                    <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+                </div>
+                <div class="row g-3">
+                    {% for post in top_stories %}
+                    <div class="col-lg-4">
+                        <div class="post-box-layout4 radius-default padding-20 bg-color-old-lace box-shadow-large shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="image-wrapper radius-default">
+                                <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="470" src="{{ post.image.url }}" alt="Post"></a>
+                            </div>
+                            <div class="content-holder">
+                                <div class="entry-category style-2 color-dark-1-fixed">
+                                    <ul>
+                                        <li>
+                                            <a href="archive-layout1.html">{{ post.category.name }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="entry-title color-dark-1-fixed underline-animation post-title-truncate"><a href="post-format-default.html" class="link-wrap">{{ post.title }}</a></h3>
+                                <ul class="entry-meta color-dark-1-fixed">
+                                    <li class="post-author">
+                                        <a href="author.html">
+                                            <img src="{% static 'imgs/assets/media/blog/profile1.webp' %}" alt="Author">
+                                            {{ post.author_name }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="regular-clock-circle"></i>{{ post.created_at }}
+                                    </li>
+                                    <li>
+                                        <i class="regular-eye"></i>{{ post.clicks }}
+                                    </li>
+                                </ul>
+                                <a href="{% url 'post_details' post.category.slug post.id %}" class="btn-text color-dark-1-fixed">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+
+
+
+
+
+        <!-- <section class="post-wrap-layout21 space-top-50 bg-color-light-1 transition-default">
+            <div class="container">
+              <div class="section-heading heading-style-1">
+                <h2 class="title">Top Blogs</h2>
+                
+                <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+              </div>
+              <div class="row g-3">
+                {% for post in top_stories %}
+                  <div class="col-lg-4">
+                    <div class="post-box-layout4 radius-default padding-20 bg-color-old-lace box-shadow-large shadow-style-2 box-border-dark-1 no-border transition-default">
+                      <div class="figure-holder radius-default">
+                        <a href="" class=""><img  src="{{ post.image.url }}" alt="Post" ></a>
+                      </div>
+                      <div class="content-holder">
+                        <div class="entry-category style-2 color-dark-1-fixed">
+                          <ul>
+                            <li>
+                              <a href="archive-layout1.html">{{ post.category.name }}</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <h3 class="entry-title color-dark-1-fixed underline-animation"><a href="" class="link-wrap">{{ post.title }}</a></h3>
+                        <ul class="entry-meta color-dark-1-fixed">
+                          <li class="post-author">
+                            <a href="author.html">
+                                
+                                <img src="{% static 'imgs/assets/media/blog/profile1.webp' %}" alt="Author">
+                                {{ post.author_name }}
+                             
+                            </a>
+                          </li>
+                          <li>
+                            <i class="regular-clock-circle"></i>{{ post.created_at }}
+                          </li>
+                          <li>
+                            <i class="regular-eye"></i>{{ post.clicks }} views
+                          </li>
+                        </ul>
+                        <a href="{% url 'post_details' post.category.slug post.id %}" class="btn-text color-dark-1-fixed">See Details<span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section> -->
+
+
+        <!-- <section class="post-wrap-layout21 space-top-50 bg-color-light-1 transition-default">
             <div class="container">
                 <div class="section-heading heading-style-1">
                     <h2 class="title">Top Stories</h2>
@@ -618,7 +828,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!--=====================================-->
         <!--=          Post Area Start          =-->

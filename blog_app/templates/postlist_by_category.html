@@ -18,7 +18,7 @@
                             <div class="animation-child post-box-layout18 box-border-dark-1 radius-default padding-20 bg-color-light-1 transition-default">
                                 <div class="figure-holder radius-default" style="display: flex; justify-content: center; align-items: center;">
                                     {% if post.image %}
-                                    <a href="" class="link-wrap img-height-100"><img src="{{ post.image.url }}"style="display: block; width: 500px; height: 200px; object-fit: cover;"  alt="Post"></a>
+                                    <a class=""><img src="{{ post.image.url }}"style="display: block; width: 500px; height: 200px; object-fit: cover;"  alt="Post"></a>
                                     {% else %}
                                     <!-- Display a default image or a message if no image is available -->
                                      <p>No image available</p>
@@ -28,14 +28,14 @@
                                     <div class="entry-category style-2 color-dark-1-fixed">
                                         <ul>
                                             <li>
-                                                <a href="archive-layout1.html">TRAVEL</a>
+                                                <a href="{% url 'post_list_by_category_paginated' category.slug  %}">{{ category.name }}</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <h3 class="entry-title color-dark-1 underline-animation"><a href="post-format-default.html" class="link-wrap">{{ post.title }}</a></h3>
+                                    <h3 class="entry-title color-dark-1 underline-animation"><a class="link-wrap">{{ post.title }}</a></h3>
                                     <ul class="entry-meta color-dark-1">
                                         <li class="post-author">
-                                            <a href="author.html">
+                                            <a>
                                                 <!-- <img src="assets/media/blog/profile3.webp" alt="Author"> -->
                                                 {{ post.author_name }}
                                             </a>
