@@ -140,5 +140,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MEDIA_URL = '/Post/'
 # MEDIA_ROOT = os.path.join(BASE_DIR,'Post')
-MEDIA_URL = '/blogging/blogging_website/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'blogging/blogging_website/')
+#MEDIA_URL = '/blogging/blogging_website/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'blogging/blogging_website/')
+
+MEDIA_URL = '/media/'  # The URL where media files will be served
+MEDIA_ROOT = BASE_DIR / 'media'  # The physical location where media files are stored

@@ -24,6 +24,11 @@ def blog(request):
                            ]
     # Retrieve top 3 clicked posts
     top_stories = Post.objects.order_by('-clicks')[:3]
+    print(list(top_stories))
+    # Retrieve 5 recent posts
+    recent_articles = Post.objects.order_by('-updated_at')[:5]     
+    
+    print(list(recent_articles))
     
     for post in top_stories:
         if post.author.is_superuser:
@@ -39,8 +44,15 @@ def blog(request):
         return redirect('blog')
     return render(request, 'index.html',{
         'specific_categories': specific_categories,
-        'top_stories': top_stories
+        'top_stories': top_stories,
+        'recent_articles' : recent_articles
     })
+
+	
+
+
+
+
 
 
 def blog_admin(request):

@@ -665,8 +665,9 @@
                         </div>
                     </div>
                     {% endfor %}
-
-
+				</div>
+			</div>
+		</section>
 
 
 
@@ -840,43 +841,52 @@
                     <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
                 </div>
                 <div class="row g-3">
+                     {% if recent_articles %}
+                     <pre>{{ recent_articles }}</pre>
                     <div class="col-lg-6">
                         <div class="post-box-layout10 radius-default both-side-equal">
                             <div class="figure-holder radius-default">
-                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="700" height="770" src="{% static 'imgs/assets/media/blog/post28.webp' %}" alt="Post"></a>
+                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="700" height="770" src="{{ recent_articles.0.image.url }}" alt="Post"></a>
                             </div>
                             <div class="content-holder">
                                 <div class="entry-category style-2 color-dark-1-fixed">
                                     <ul>
                                         <li>
-                                            <a href="archive-layout1.html">FOOD</a>
+                                            <a href="archive-layout1.html"> {{ recent_articles.0.category.name }}</a>
                                         </li>
                                     </ul>
                                 </div>
-                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Beauty Of Deep Space. Billions Of Galaxies In The Universe</a></h3>
+                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">{{ recent_articles.0.title }}</a></h3>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     <div class="col-lg-6">
                         <div class="row g-3">
+                            
+                            {% for item in recent_articles%}
+								{% if not forloop.first %}
                             <div class="col-md-6">
                                 <div class="post-box-layout11 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
                                     <div class="figure-holder radius-default">
-                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post29.webp' %}" alt="Post"></a>
+                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{{ item.image.url }}" alt="Post"></a>
                                     </div> 
                                     <div class="content-holder">
                                         <div class="entry-category style-2 color-dark-1-fixed">
                                             <ul>
                                                 <li>
-                                                    <a href="archive-layout1.html">SPORTS</a>
+                                                    <a href="archive-layout1.html"> {{ item.category.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Virtual Reality (VR), The Use Computer Modeling</a></h3>
+                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">{{ item.title }}</a></h3>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+								{% endif %}
+                            {% endfor %}
+                            
+                            <!-- <div class="col-md-6">
                                 <div class="post-box-layout11 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
                                     <div class="figure-holder radius-default">
                                         <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post30.webp' %}" alt="Post"></a>
@@ -926,7 +936,7 @@
                                         <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women</a></h3>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
