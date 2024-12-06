@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'css/assets/css/user-login.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      <div class="logo">
+        <h1>BlogBazzar</h1>
+      </div>
+      <div class="illustration">
+        <img src="{% static 'imgs/assets/media/illustration.png' %}" alt="Illustration">
+      </div>
+      <h2 style="font-size: 95%; margin-top: 5%;">Online Community For Bloggers</h2>
+    </div>
+    <div class="right-section">
+      <h2 style="text-align: center;">Welcome back to the BlogBazzar Community</h2><br>
+      
+      <!-- Google Login Button -->
+      <div class="google-login" style="text-align: center;">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">
+          <img src="{% static 'imgs/assets/media/google-login.png' %}" alt="Log in with Google">
+        </a>
+      </div>
+      
+      <form class="login-form" action="{% url 'userlogin' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="email">Email or Username</label>
+          <input type="text" id="email" name="email" placeholder="johndoe@example.com" required autocomplete="new-email">
+          <div class="input-line"></div>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="********" required autocomplete="new-password">
+          <div class="input-line"></div>
+        </div>
+        <button type="submit" class="login-btn">Log In</button>
+      </form>
+
+      {% if messages %}
+      {% for message in messages %}<br>
+        <div class="alert alert-{{ message.tags }}" id="error-message" style="color: red; text-align: center;">
+          {{ message }}
+        </div>
+        <script>
+          setTimeout(function() {
+            window.location.reload();
+          }, 3000); // Refresh page after 3 seconds
+        </script>
+      {% endfor %}
+      {% endif %}
+
+      <p class="signup">
+        No Account yet? <a href="{% url 'usersignup' %}">Sign Up</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

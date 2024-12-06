@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <link rel="stylesheet" href="{% static 'css/assets/css/user-signup.css' %}">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left">
+            <img src="{% static 'imgs/assets/media/cofee.jpg' %}" alt="Coffee and Notebook">
+        </div>
+        <!-- Right Section -->
+        <div class="right">
+            <div class="form-container">
+                <div class="logo-container">
+                    <img src="{% static 'imgs/assets/media/logo1.png' %}" alt="BlogBazzar Logo" class="logo-img">
+                    <h1 class="logo-text">BlogBazzar</h1>
+                </div>
+                <p class="welcome-text">Welcome Back 👋</p>
+                <h2>Continue to your Account.</h2>
+                
+                <!-- Form -->
+                <form action="{% url 'social:begin' 'google-oauth2' %}" method="post" style="display: inline;"> 
+                    {% csrf_token %} 
+                    <button id="google-signin-btn" type="submit" name="login_method" value="google" class="google-btn"> 
+                        <img src="{% static 'imgs/assets/media/google-signup.png' %}" alt="Google Icon"> Continue with Google 
+                    </button> 
+                </form>
+                    <script src="https://apis.google.com/js/api.js"></script>
+
+                   
+                    
+                   
+                    <p style="text-align: center;">Or use Email</p>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %} 
+
+                    <!-- Email and Password -->
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="johndoe@email.com" required autocomplete="new-email">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="************" required autocomplete="new-password">
+
+                    <!-- Continue Button -->
+                    <button type="submit" name="login_method"class="continue-btn">Continue</button>
+                    <div id="email-error" style="color: red;"></div>
+                </form>
+
+                <p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}<br>
+                                <p style="color: red;">{{ message }}</p>
+                            {% else %}
+                                <p>{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </p>
+                
+                <p class="footer-text">
+                    Already have an account? <a href="{% url 'userlogin' %}">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            var email = document.getElementById('email').value;
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').innerHTML = 'Please enter a valid email address.';
+                event.preventDefault();
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/vendor/bootstrap.min.css' %}">
 
+    <!-- font awesome........... -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/assets/css/app.css' %}">
@@ -65,10 +69,10 @@
 
         <header class="header header2 sticky-on">
             <div id="topbar-wrap">
-                <div class="topbar-global color-light-1-fixed">
-                    <div class="container-fluid">
+                <!-- <div class="topbar-global color-light-1-fixed">
+                    <div class="container-fluid"> -->
 
-
+<!-- 
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="news-feed-wrap">
                                 <div class="news-feed-label">BREAKING:</div>
@@ -176,11 +180,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                    </div>
+                    <!-- </div>
                 </div>
-            </div>
+            </div> -->
             <div id="sticky-placeholder"></div>
             <div id="navbar-wrap" class="navbar-wrap">
                 <div class="container-fluid">
@@ -327,35 +331,35 @@
                                     <div class="navbar navbar-expand-md">
                                         <div class="dropdown">
                                             <a class="dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Profile">
-                                                <span class="thumble-holder img-height-100"><img width="40" height="40" src="{% static 'imgs/assets/media/blog/profile4.webp' %}" alt="Profile"></span>
+                                                <span class="thumble-holder img-height-100">
+                                                    {% if user.is_authenticated %}
+                                                    <img width="40" height="40" src="{% static 'imgs/assets/media/blog/profile4.webp' %}" alt="Profile">
+                                                    {% else %}
+                                                    <img width="40" height="40" src="{% static 'imgs/assets/media/blog/no-profile.png' %}" alt="No Face Profile">
+                                                    {% endif %}
+                                                </span>
                                             </a>
-
-
-
                                             <div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown2">
                                                 <div class="dropdown-menu-inner">
                                                     <div class="profile-content with-icon">
                                                         <ul>
-                                                            <li><a href="author.html">
-                                                                    <div class="icon-holder"><i class="regular-user"></i></div>Profile
-                                                                </a></li>
-                                                            <li><a href="author.html">
-                                                                    <div class="icon-holder"><i class="regular-activity"></i></div>Activity Log
-                                                                </a></li>
-                                                            <li><a href="author.html">
-                                                                    <div class="icon-holder"><i class="regular-plus-rectangle"></i></div>Library
-                                                                </a></li>
+                                                            {% if user.is_authenticated %}
+                                                                <li><a href="{% url 'profile' %}">
+                                                                        <div class="icon-holder"><i class="regular-user"></i></div>Profile
+                                                                    </a></li>
+                                                                <li><a href="{% url 'logout' %}">
+                                                                        <div class="icon-holder"><i class="regular-sign-out"></i></div>Sign Out
+                                                                    </a></li>
+                                                            {% else %}
+
+                                                                <li><a href="{% url 'userlogin' %}">
+                                                                        <div class="icon-holder"><i class="regular-sign-in"></i></div>Log In
+                                                                    </a></li>
+                                                                <li><a href="{% url 'usersignup' %}">
+                                                                        <div class="icon-holder"><i class=""></i></div>Sign Up
+                                                                    </a></li>
+                                                            {% endif %}
                                                         </ul>
-                                                    </div>
-                                                    <div class="profile-content">
-                                                        <ul>
-                                                            <li><a href="author.html">Become a Member</a></li>
-                                                            <li><a href="author.html">Apply for author verification</a></li>
-                                                            <li><a href="author.html">Settings</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <a href="#" class="w-100 axil-btn axil-btn-ghost btn-color-alter axil-btn-small">Sign Out</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -628,7 +632,7 @@
             <div class="container">
                 <div class="section-heading heading-style-1">
                     <h2 class="title">Top Blogs</h2>
-                    <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+                    <!-- <a href="" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a> -->
                 </div>
                 <div class="row g-3">
                     {% for post in top_stories %}
@@ -838,15 +842,15 @@
             <div class="container">
                 <div class="section-heading heading-style-1">
                     <h2 class="title">Recent Articles</h2>
-                    <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a>
+                    <!-- <a href="archive-layout1.html" class="link-wrap">Go to Stories <span class="icon-holder"><i class="regular-arrow-right"></i></span> </a> -->
                 </div>
                 <div class="row g-3">
                      {% if recent_articles %}
-                     <pre>{{ recent_articles }}</pre>
+                     <!-- <pre>{{ recent_articles }}</pre> -->
                     <div class="col-lg-6">
                         <div class="post-box-layout10 radius-default both-side-equal">
                             <div class="figure-holder radius-default">
-                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="700" height="770" src="{{ recent_articles.0.image.url }}" alt="Post"></a>
+                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100  "><img  src="{{ recent_articles.0.image.url }}" alt="Post"></a>
                             </div>
                             <div class="content-holder">
                                 <div class="entry-category style-2 color-dark-1-fixed">
@@ -867,420 +871,32 @@
                             {% for item in recent_articles%}
 								{% if not forloop.first %}
                             <div class="col-md-6">
-                                <div class="post-box-layout11 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                                    <div class="figure-holder radius-default">
-                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{{ item.image.url }}" alt="Post"></a>
+                                <div class="article-card radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                                    <div class="image-wrapper-2 radius-default">
+                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img src="{{ item.image.url }}" alt="Post"></a>
                                     </div> 
                                     <div class="content-holder">
                                         <div class="entry-category style-2 color-dark-1-fixed">
                                             <ul>
                                                 <li>
-                                                    <a href="archive-layout1.html"> {{ item.category.name }}</a>
+                                                    <a href="archive-layout1.html" class="category-link"> {{ item.category.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">{{ item.title }}</a></h3>
+                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation post-title-truncate"><a href="post-format-default.html" class="link-wrap">{{ item.title }}</a></h3>
                                     </div>
                                 </div>
                             </div>
+                            
 								{% endif %}
                             {% endfor %}
-                            
-                            <!-- <div class="col-md-6">
-                                <div class="post-box-layout11 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                                    <div class="figure-holder radius-default">
-                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post30.webp' %}" alt="Post"></a>
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-dark-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">TRAVEL</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="post-box-layout11 radius-default padding-20 bg-color-selago box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                                    <div class="figure-holder radius-default">
-                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post31.webp' %}" alt="Post"></a>
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-dark-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">FASHION</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Air Pods Pro With Wireless Charging Case</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="post-box-layout11 radius-default padding-20 bg-color-old-lace box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                                    <div class="figure-holder radius-default">
-                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post32.webp' %}" alt="Post"></a>
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-dark-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">TECH</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women</a></h3>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!--=====================================-->
-        <!--=          Post Area Start          =-->
-        <!--=====================================-->
-        <section class="post-wrap-layout12 bg-color-woodsmoke space-top-50 space-bottom-60 transition-default">
-            <div class="container">
-                <div class="section-heading heading-style-4">
-                    <h2 class="title">Top Videos</h2>
-                </div>
-                <div class="row g-3">
-                    <div class="col-lg-7">
-                        <div class="post-box-layout14 radius-default both-side-equal">
-                            <div class="figure-holder radius-default">
-                                <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-large popup-youtube"><i class="solid-play"></i></a>
-                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="810" height="480" src="{% static 'imgs/assets/media/blog/post89.webp' %}" alt="Post"></a>
-                            </div>
-                            <div class="content-holder">
-                                <div class="entry-category style-2 color-dark-1-fixed">
-                                    <ul>
-                                        <li>
-                                            <a href="archive-layout1.html">AMERICA</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Beauty Of Deep Space. Billions Of Galaxies In The Universe.</a></h3>
-                                <ul class="entry-meta color-light-1-fixed">
-                                    <li class="post-author">by
-                                        <a href="author.html">
-                                            Jenny Wilson
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="regular-clock-circle"></i>2 min read
-                                    </li>
-                                    <li>
-                                        <i class="regular-eye"></i>9k
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="{% static 'imgs/assets/media/blog/post62.webp' %}" alt="Post"></a>
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">FOOD</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    Esther Howard
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post63.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">HEALTH</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">The Science Behind Skin Care Products Has Come</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    John Philipe
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post73.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">DESIGN</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Millions Of Manuscripts Are Written Aenean Ac Iaculis</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    Alisa Michaels
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post74.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">TRAVEL</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used Strengthen Weak Muscles</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    Ashley Graham
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!--=====================================-->
-        <!--=          Post Area Start          =-->
-        <!--=====================================-->
-        <section class="post-wrap-layout20 space-top-50 bg-color-light-1 transition-default">
-            <div class="container">
-                <div class="section-heading heading-style-1">
-                    <h2 class="title">Most Popular</h2>
-                </div>
-                <div class="row g-3">
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post62.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">FOOD</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Virtual Reality (VR), The Use Computer Modeling</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                Esther Howard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>7 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post63.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">TECH</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Red Lion Attack Underwater Exercise Is Used Weak Muscles</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                John Philipe
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>6 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-selago box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post64.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">TRAVEL</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling Moderation</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                Alisa Michaels
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>5 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-old-lace box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post65.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">HEALTH</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Millions Of Manuscripts Are Written Aenean Ac Iaculis</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                Ashley Graham
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>3 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post4.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">FASHION</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used By Jhon Hasal Strengthen Weak Muscles</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                Sergio Pliego
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>8 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="post-box-layout22 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                            <div class="figure-holder radius-default">
-                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post6.webp" alt="Post"></a> -->
-                            </div>
-                            <div class="content-holder">
-                                <div>
-                                    <div class="entry-category style-2 color-dark-1-fixed">
-                                        <ul>
-                                            <li>
-                                                <a href="archive-layout1.html">SPORTS</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women Which Are Fashionable</a></h3>
-                                    <ul class="entry-meta color-dark-1-fixed">
-                                        <li class="post-author">
-                                            <a href="author.html">
-                                                Kristin Watson
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="regular-clock-circle"></i>7 min read
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--=====================================-->
-        <!--=          Post Area Start          =-->
-        <!--=====================================-->
         <section class="team-wrap-layout1 space-top-50 space-bottom-10 bg-color-light-1 transition-default">
             <div class="container">
                 <div class="section-heading heading-style-1">
@@ -1358,10 +974,8 @@
                 </div>
             </div>
         </section>
-        <!--=====================================-->
-        <!--=          Post Area Start          =-->
-        <!--=====================================-->
-        <section class="post-wrap-layout19 space-top-50 bg-color-light-1 transition-default">
+
+        <!-- <section class="post-wrap-layout19 space-top-50 bg-color-light-1 transition-default">
             <div class="container">
                 <div class="row g-3">
                     <div class="col-lg-4">
@@ -1369,7 +983,7 @@
                             <div class="single-item no-divider">
                                 <div class="figure-holder radius-default">
                                     <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="440" src="assets/media/blog/post33.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-2 color-dark-1-fixed">
                                         <ul>
@@ -1384,7 +998,7 @@
                                         <li class="post-author">
                                             <a href="author.html">
                                                 <!-- <img src="assets/media/blog/profile4.webp" alt="Author"> -->
-                                                John Philipe
+                                                <!-- John Philipe
                                             </a>
                                         </li>
                                         <li>
@@ -1397,9 +1011,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default ">
+                                <div class="figure-holder radius-default ">  -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post34.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1413,9 +1027,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default">
+                                <div class="figure-holder radius-default"> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post35.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1433,9 +1047,9 @@
                     <div class="col-lg-4">
                         <div class="post-box-layout12 radius-default padding-20 bg-color-mimosa box-shadow-large shadow-style-2 box-border-dark-1 no-border transition-default">
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default">
+                                <div class="figure-holder radius-default"> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="440" src="assets/media/blog/post36.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-2 color-dark-1-fixed">
                                         <ul>
@@ -1448,9 +1062,9 @@
                                             Busy Women</a></h3>
                                     <ul class="entry-meta color-dark-1-fixed">
                                         <li class="post-author">
-                                            <a href="author.html">
+                                            <a href="author.html"> -->
                                                 <!-- <img src="assets/media/blog/profile2.webp" alt="Author"> -->
-                                                Alisa Michaels
+                                                <!-- Alisa Michaels
                                             </a>
                                         </li>
                                         <li>
@@ -1463,9 +1077,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default ">
+                                <div class="figure-holder radius-default "> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post37.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1479,9 +1093,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default">
+                                <div class="figure-holder radius-default"> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post38.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1499,9 +1113,9 @@
                     <div class="col-lg-4">
                         <div class="post-box-layout12 radius-default padding-20 bg-color-selago box-shadow-large shadow-style-2 box-border-dark-1 no-border transition-default">
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default">
+                                <div class="figure-holder radius-default"> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="660" height="440" src="assets/media/blog/post39.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-2 color-dark-1-fixed">
                                         <ul>
@@ -1514,9 +1128,9 @@
                                             Charging Case That Make Me Happy</a></h3>
                                     <ul class="entry-meta color-dark-1-fixed">
                                         <li class="post-author">
-                                            <a href="author.html">
+                                            <a href="author.html"> -->
                                                 <!-- <img src="assets/media/blog/profile3.webp" alt="Author"> -->
-                                                Ashley Graham
+                                                <!-- Ashley Graham
                                             </a>
                                         </li>
                                         <li>
@@ -1529,9 +1143,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default ">
+                                <div class="figure-holder radius-default "> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post40.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1545,9 +1159,9 @@
                                 </div>
                             </div>
                             <div class="single-item no-divider">
-                                <div class="figure-holder radius-default">
+                                <div class="figure-holder radius-default"> -->
                                     <!-- <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="250" height="168" src="assets/media/blog/post41.webp" alt="Post"></a> -->
-                                </div>
+                                <!-- </div>
                                 <div class="content-holder">
                                     <div class="entry-category style-3 color-dark-1-fixed">
                                         <ul>
@@ -1564,7 +1178,414 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>  -->
+
+
+
+
+
+                            
+                            <!-- <div class="col-md-6">
+                                <div class="post-box-layout11 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                                    <div class="figure-holder radius-default">
+                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post30.webp' %}" alt="Post"></a>
+                                    </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-dark-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">TRAVEL</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="post-box-layout11 radius-default padding-20 bg-color-selago box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                                    <div class="figure-holder radius-default">
+                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post31.webp' %}" alt="Post"></a>
+                                    </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-dark-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">FASHION</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Air Pods Pro With Wireless Charging Case</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="post-box-layout11 radius-default padding-20 bg-color-old-lace box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                                    <div class="figure-holder radius-default">
+                                        <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{% static 'imgs/assets/media/blog/post32.webp' %}" alt="Post"></a>
+                                    </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-dark-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">TECH</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women</a></h3>
+                                    </div>
+                                </div>
+                            </div> -->
+                      
+        <!--=====================================-->
+        <!--=          Post Area Start          =-->
+        <!--=====================================-->
+        <!-- <section class="post-wrap-layout12 bg-color-woodsmoke space-top-50 space-bottom-60 transition-default">
+            <div class="container">
+                <div class="section-heading heading-style-4">
+                    <h2 class="title">Top Videos</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-7">
+                        <div class="post-box-layout14 radius-default both-side-equal">
+                            <div class="figure-holder radius-default">
+                                <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-large popup-youtube"><i class="solid-play"></i></a>
+                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="810" height="480" src="{% static 'imgs/assets/media/blog/post89.webp' %}" alt="Post"></a>
+                            </div>
+                            <div class="content-holder">
+                                <div class="entry-category style-2 color-dark-1-fixed">
+                                    <ul>
+                                        <li>
+                                            <a href="archive-layout1.html">AMERICA</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Beauty Of Deep Space. Billions Of Galaxies In The Universe.</a></h3>
+                                <ul class="entry-meta color-light-1-fixed">
+                                    <li class="post-author">by
+                                        <a href="author.html">
+                                            Jenny Wilson
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="regular-clock-circle"></i>2 min read
+                                    </li>
+                                    <li>
+                                        <i class="regular-eye"></i>9k
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="post-box-layout23 radius-default both-side-equal">
+                                    <div class="figure-holder radius-default">
+                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
+                                        <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="{% static 'imgs/assets/media/blog/post62.webp' %}" alt="Post"></a>
+                                    </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-light-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">FOOD</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling</a></h3>
+                                        <ul class="entry-meta color-light-1-fixed">
+                                            <li class="post-author">by
+                                                <a href="author.html">
+                                                    Esther Howard
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="post-box-layout23 radius-default both-side-equal">
+                                    <div class="figure-holder radius-default">
+                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
+                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post63.webp" alt="Post"></a> -->
+                                    <!-- </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-light-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">HEALTH</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">The Science Behind Skin Care Products Has Come</a></h3>
+                                        <ul class="entry-meta color-light-1-fixed">
+                                            <li class="post-author">by
+                                                <a href="author.html">
+                                                    John Philipe
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="post-box-layout23 radius-default both-side-equal">
+                                    <div class="figure-holder radius-default">
+                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a> -->
+                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post73.webp" alt="Post"></a> -->
+                                    <!-- </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-light-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">DESIGN</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Millions Of Manuscripts Are Written Aenean Ac Iaculis</a></h3>
+                                        <ul class="entry-meta color-light-1-fixed">
+                                            <li class="post-author">by
+                                                <a href="author.html">
+                                                    Alisa Michaels
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="post-box-layout23 radius-default both-side-equal">
+                                    <div class="figure-holder radius-default">
+                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
+                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post74.webp" alt="Post"></a> -->
+                                    <!-- </div>
+                                    <div class="content-holder">
+                                        <div class="entry-category style-2 color-light-1-fixed">
+                                            <ul>
+                                                <li>
+                                                    <a href="archive-layout1.html">TRAVEL</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used Strengthen Weak Muscles</a></h3>
+                                        <ul class="entry-meta color-light-1-fixed">
+                                            <li class="post-author">by
+                                                <a href="author.html">
+                                                    Ashley Graham
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </section>  -->
+
+
+
+
+
+
+
+        <!--=====================================-->
+        <!--=          Post Area Start          =-->
+        <!--=====================================-->
+        <!-- <section class="post-wrap-layout20 space-top-50 bg-color-light-1 transition-default">
+            <div class="container">
+                <div class="section-heading heading-style-1">
+                    <h2 class="title">Most Popular</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default">
+                                <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post62.webp" alt="Post"></a>
+                            </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">FOOD</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Virtual Reality (VR), The Use Computer Modeling</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                Esther Howard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>7 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default">
+                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post63.webp" alt="Post"></a> -->
+                            <!-- </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">TECH</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Red Lion Attack Underwater Exercise Is Used Weak Muscles</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                John Philipe
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>6 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-selago box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default"> -->
+                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post64.webp" alt="Post"></a> -->
+                            <!-- </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">TRAVEL</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling Moderation</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                Alisa Michaels
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>5 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-old-lace box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default"> -->
+                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post65.webp" alt="Post"></a> -->
+                            <!-- </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">HEALTH</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Millions Of Manuscripts Are Written Aenean Ac Iaculis</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                Ashley Graham
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>3 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-mimosa box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default"> -->
+                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post4.webp" alt="Post"></a> -->
+                            <!-- </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">FASHION</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used By Jhon Hasal Strengthen Weak Muscles</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                Sergio Pliego
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>8 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="post-box-layout22 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
+                            <div class="figure-holder radius-default"> -->
+                                <!-- <a href="post-format-default.html" class="link-wrap img-height-100"><img width="500" height="500" src="assets/media/blog/post6.webp" alt="Post"></a> -->
+                            <!-- </div>
+                            <div class="content-holder">
+                                <div>
+                                    <div class="entry-category style-2 color-dark-1-fixed">
+                                        <ul>
+                                            <li>
+                                                <a href="archive-layout1.html">SPORTS</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 class="entry-title h3-small color-dark-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Smarter Food Choices 101 Tips For Busy Women Which Are Fashionable</a></h3>
+                                    <ul class="entry-meta color-dark-1-fixed">
+                                        <li class="post-author">
+                                            <a href="author.html">
+                                                Kristin Watson
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <i class="regular-clock-circle"></i>7 min read
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!--=====================================-->
+        <!--=          Post Area Start          =-->
+        <!--=====================================-->
+       
+        <!--=====================================-->
+        <!--=          Post Area Start          =-->
+        <!--=====================================-->
+        
         <!--=====================================-->
         <!--=        Newsletter Area Start      =-->
         <!--=====================================-->

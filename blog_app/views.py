@@ -11,16 +11,18 @@ from django.contrib import messages
 
 def blog(request):
     travel_category = Category.objects.get(slug='travel')
+    health_category=Category.objects.get(slug='lifestyle')
     technology_category=Category.objects.get(slug='technology')
     business_category=Category.objects.get(slug='business')
-    health_category=Category.objects.get(slug='lifestyle')
-    fashion_category=Category.objects.get(slug='fashion')
+    education_category=Category.objects.get(slug='education')
+    fitness_category=Category.objects.get(slug='fitness')
 
     specific_categories = [travel_category, 
                            technology_category,
                            business_category,
                            health_category,
-                           fashion_category,
+                           education_category,
+                           fitness_category,
                            ]
     # Retrieve top 3 clicked posts
     top_stories = Post.objects.order_by('-clicks')[:3]
@@ -47,6 +49,18 @@ def blog(request):
         'top_stories': top_stories,
         'recent_articles' : recent_articles
     })
+
+def top_blogs(request):
+    top_blogs = Post.objects.order_by('-clicks')
+    paginator = Paginator(top_blogs, 9)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'posts': page_obj.object_list,
+        'page_obj': page_obj,
+    }
+    return render(request, 'postlist_by_category.html', context)
 
 	
 
@@ -331,3 +345,4 @@ def post_detail(request, category_slug, post_id):
 # def post_detail(request, category_slug, post_slug):
 #     post = get_object_or_404(Post, category__slug=category_slug, slug=post_slug)
 #     return render(request, 'postdetails.html', {'post': post})
+
