@@ -1,0 +1,12 @@
+.image-wrapper-recent-articles {
+    height: 250px; /* adjust the height to your design's requirements */
+    overflow: hidden;
+  }
+
+.image-wrapper-recent-articles img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-width: 100% !important;
+    max-height: 230px !important;
+  }

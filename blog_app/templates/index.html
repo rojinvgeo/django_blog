@@ -25,6 +25,7 @@
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/assets/css/app.css' %}">
     <link rel="stylesheet" href="{% static 'css/assets/css/image-align.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blogcss/css/custom.css' %}">
 
 </head>
 
@@ -842,7 +843,7 @@
                 </div>
                 <div class="row g-3">
                      {% if recent_articles %}
-                     <pre>{{ recent_articles }}</pre>
+                     
                     <div class="col-lg-6">
                         <div class="post-box-layout10 radius-default both-side-equal">
                             <div class="figure-holder radius-default">
@@ -868,7 +869,7 @@
 								{% if not forloop.first %}
                             <div class="col-md-6">
                                 <div class="post-box-layout11 radius-default padding-20 bg-color-scandal box-shadow-default shadow-style-2 box-border-dark-1 no-border transition-default">
-                                    <div class="figure-holder radius-default">
+                                    <div class="image-wrapper-recent-articles figure-holder radius-default">
                                         <a href="post-format-default.html" class="link-wrap img-height-100"><img width="480" height="344" src="{{ item.image.url }}" alt="Post"></a>
                                     </div> 
                                     <div class="content-holder">
@@ -952,139 +953,73 @@
                     <h2 class="title">Top Videos</h2>
                 </div>
                 <div class="row g-3">
+					{% for top_video in top_videos %}
+					{% if forloop.first %}
                     <div class="col-lg-7">
                         <div class="post-box-layout14 radius-default both-side-equal">
                             <div class="figure-holder radius-default">
-                                <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-large popup-youtube"><i class="solid-play"></i></a>
-                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="810" height="480" src="{% static 'imgs/assets/media/blog/post89.webp' %}" alt="Post"></a>
+                                <a href="{{ top_video.video_url }}" aria-label="Youtube Video" class="play-btn size-large popup-youtube"><i class="solid-play"></i></a>
+                                <a href="post-format-default.html" class="link-wrap figure-overlay img-height-100"><img width="810" height="480" src="{{ top_video.video_thumb.url }}" alt="Post"></a>
                             </div>
                             <div class="content-holder">
                                 <div class="entry-category style-2 color-dark-1-fixed">
                                     <ul>
                                         <li>
-                                            <a href="archive-layout1.html">AMERICA</a>
+                                            <a href="archive-layout1.html">{{ top_video.category.name }}</a>
                                         </li>
                                     </ul>
                                 </div>
-                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Beauty Of Deep Space. Billions Of Galaxies In The Universe.</a></h3>
+                                <h3 class="entry-title h3-large color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">{{ top_video.title }}</a></h3>
                                 <ul class="entry-meta color-light-1-fixed">
                                     <li class="post-author">by
                                         <a href="author.html">
-                                            Jenny Wilson
+                                            {{ top_video.author_name }}
                                         </a>
                                     </li>
                                     <li>
                                         <i class="regular-clock-circle"></i>2 min read
                                     </li>
                                     <li>
-                                        <i class="regular-eye"></i>9k
+                                        <i class="regular-eye"></i>{{ top_video.clicks }}
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                     <div class="col-lg-5">
                         <div class="row g-3">
+							{% for top_video in top_videos %}
+							{% if forloop.counter > 1 %} 
                             <div class="col-12">
                                 <div class="post-box-layout23 radius-default both-side-equal">
                                     <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="{% static 'imgs/assets/media/blog/post62.webp' %}" alt="Post"></a>
+                                        <a href="{{ top_video.video_url }}" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
+                                        <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="{{ top_video.video_thumb.url }}" alt="Post"></a>
                                     </div>
                                     <div class="content-holder">
                                         <div class="entry-category style-2 color-light-1-fixed">
                                             <ul>
                                                 <li>
-                                                    <a href="archive-layout1.html">FOOD</a>
+                                                    <a href="archive-layout1.html">{{ top_video.category.name }}</a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Reality Hosting, The Use Computer Modeling</a></h3>
+                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">{{ top_video.title }}</a></h3>
                                         <ul class="entry-meta color-light-1-fixed">
                                             <li class="post-author">by
                                                 <a href="author.html">
-                                                    Esther Howard
+                                                    {{ top_video.author_name }}
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post63.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">HEALTH</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">The Science Behind Skin Care Products Has Come</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    John Philipe
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post73.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">DESIGN</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Millions Of Manuscripts Are Written Aenean Ac Iaculis</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    Alisa Michaels
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="post-box-layout23 radius-default both-side-equal">
-                                    <div class="figure-holder radius-default">
-                                        <a href="https://www.youtube.com/watch?v=1iIZeIy7TqM" aria-label="Youtube Video" class="play-btn size-small popup-youtube not-animation position-center"><i class="solid-play"></i></a>
-                                        <!-- <a href="post-format-default.html" class="link-wrap figure-overlay overlay-whole img-height-100"><img width="500" height="500" src="assets/media/blog/post74.webp" alt="Post"></a> -->
-                                    </div>
-                                    <div class="content-holder">
-                                        <div class="entry-category style-2 color-light-1-fixed">
-                                            <ul>
-                                                <li>
-                                                    <a href="archive-layout1.html">TRAVEL</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <h3 class="entry-title h3-extra-small color-light-1-fixed underline-animation"><a href="post-format-default.html" class="link-wrap">Underwater Exercise Is Used Strengthen Weak Muscles</a></h3>
-                                        <ul class="entry-meta color-light-1-fixed">
-                                            <li class="post-author">by
-                                                <a href="author.html">
-                                                    Ashley Graham
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+						{% endif %}
+						{% endfor %}
+                            
                         </div>
                     </div>
                 </div>

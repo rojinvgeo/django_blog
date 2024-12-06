@@ -24,11 +24,14 @@ def blog(request):
                            ]
     # Retrieve top 3 clicked posts
     top_stories = Post.objects.order_by('-clicks')[:3]
-    print(list(top_stories))
-    # Retrieve 5 recent posts
-    recent_articles = Post.objects.order_by('-updated_at')[:5]     
     
-    print(list(recent_articles))
+    # Retrieve 5 recent posts
+    recent_articles = Post.objects.order_by('-updated_at')[:5]   
+    
+    # Filter video posts separately
+    top_videos = Post.objects.filter(video_url__isnull=False).order_by('-created_at')[:5]
+    # Full dump of the top_videos queryset
+    print(list(top_videos.values()))
     
     for post in top_stories:
         if post.author.is_superuser:
@@ -45,10 +48,11 @@ def blog(request):
     return render(request, 'index.html',{
         'specific_categories': specific_categories,
         'top_stories': top_stories,
-        'recent_articles' : recent_articles
+        'recent_articles' : recent_articles,
+        'top_videos': top_videos  # Add video posts to context
     })
 
-	
+
 
 
 

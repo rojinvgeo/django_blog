@@ -17,8 +17,11 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     clicks = models.IntegerField(default=0, blank=True)
-
+	
     
+    # Video-related fields
+    video_thumb = models.ImageField(upload_to='videos/thumb/', null=True, blank=True)
+    video_url = models.URLField(max_length=255, null=True, blank=True)
 
 
 class Comment(models.Model):
